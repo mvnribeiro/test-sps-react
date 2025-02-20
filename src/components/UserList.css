@@ -43,3 +43,32 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.createButton:hover {
+  background-color: #1e7e34;
+}
+
+.headerContainer {
+  display: grid;
+  grid-template-columns: 1fr 7fr 1fr;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.listHeader {
+  grid-column: 2;
+  text-align: center;
+}
+
+.logoutButton {
+  grid-column: 3;
+  justify-self: end;
+  top: 50%;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
