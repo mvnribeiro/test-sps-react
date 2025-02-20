@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useLoaderData, useParams } from 'react-router-dom'
+import { useLoaderData, useParams, useNavigate } from 'react-router-dom'
 import userService from '../services/UserService'
 import UserForm from '../components/UserForm'
-
-const userService = new UserService()
 
 export async function userLoader({ params }) {
   try {
@@ -18,6 +16,7 @@ export async function userLoader({ params }) {
 function EditUser() {
   const { user: loaderUser } = useLoaderData() || {}
   const params = useParams()
+  const navigate = useNavigate()
   const [user, setUser] = useState(loaderUser)
 
   useEffect(() => {
@@ -42,10 +41,36 @@ function EditUser() {
     }
   }
 
+  const handleDelete = async () => {
+    if (window.confirm('Deseja realmente excluir o usuário?')) {
+      try {
+        await userService.delete(user.id)
+        alert('Usuário excluído com sucesso!')
+        navigate('/users')
+      } catch (error) {
+        console.error('Erro ao excluir usuário:', error)
+        alert('Falha ao excluir usuário.')
+      }
+    }
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
       <h1>Edição de Usuário</h1>
-      <UserForm initialData={user} onSubmit={handleSubmit} />
+      <UserForm 
+        initialData={user} 
+        onSubmit={handleSubmit}
+        extraActions={
+          <button 
+            type="button" 
+            className="form-button delete-button" 
+            onClick={handleDelete}
+            style={{ marginLeft: '10px', backgroundColor: '#dc3545' }}
+          >
+            Excluir
+          </button>
+        }
+      />
     </div>
   )
 }

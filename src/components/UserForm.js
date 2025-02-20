@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import './UserForm.css'
 
-function UserForm({ initialData, onSubmit }) {
-  const [formData, setFormData] = useState(initialData)
+function UserForm({ initialData, onSubmit, extraActions }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    type: 'user',
+  })
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData)
+    }
+  }, [initialData])
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
@@ -22,7 +34,7 @@ function UserForm({ initialData, onSubmit }) {
         <input
           type="text"
           name="name"
-          value={formData.name}
+          value={formData.name || ''}
           onChange={handleChange}
           className="form-input"
         />
@@ -32,7 +44,7 @@ function UserForm({ initialData, onSubmit }) {
         <input
           type="email"
           name="email"
-          value={formData.email}
+          value={formData.email || ''}
           onChange={handleChange}
           className="form-input"
         />
@@ -40,9 +52,9 @@ function UserForm({ initialData, onSubmit }) {
       <div className="form-group">
         <label>Senha:</label>
         <input
-          type="text"
+          type="password"
           name="password"
-          value={formData.password}
+          value={formData.password || ''}
           onChange={handleChange}
           className="form-input"
         />
@@ -51,7 +63,7 @@ function UserForm({ initialData, onSubmit }) {
         <label>Tipo:</label>
         <select
           name="type"
-          value={formData.type}
+          value={formData.type || 'user'}
           onChange={handleChange}
           className="form-input"
         >
@@ -59,7 +71,10 @@ function UserForm({ initialData, onSubmit }) {
           <option value="user">user</option>
         </select>
       </div>
-      <button type="submit" className="form-button">Salvar</button>
+      <div className="buttonContainer">
+        <button type="submit" className="button">Salvar</button>
+        {extraActions}
+      </div>
     </form>
   )
 }
