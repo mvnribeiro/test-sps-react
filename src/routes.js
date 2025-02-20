@@ -1,23 +1,46 @@
-import { createBrowserRouter } from "react-router-dom";
-
-import Home from "./pages/Home";
-import Users from "./pages/Users";
-import UserEdit, { userLoader } from "./pages/UserEdit";
+import { createBrowserRouter } from 'react-router-dom'
+import RootLayout from './components/RootLayout'
+import ProtectedRoute from './components/ProtectedRoute'
+import Home from './pages/Home'
+import Users from './pages/Users'
+import UserEdit, { userLoader } from './pages/UserEdit'
+import SignIn from './pages/SignIn'
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    element: <RootLayout />,
+    children: [
+      {
+        path: '/signin',
+        element: <SignIn />,
+      },
+      {
+        path: '/',
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/users',
+        element: (
+          <ProtectedRoute>
+            <Users />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/users/:userId',
+        element: (
+          <ProtectedRoute>
+            <UserEdit />
+          </ProtectedRoute>
+        ),
+        loader: userLoader,
+      },
+    ],
   },
-  {
-    path: "/users",
-    element: <Users />,
-  },
-  {
-    path: "/users/:userId",
-    element: <UserEdit />,
-    loader: userLoader,
-  },
-]);
+])
 
-export default router;
+export default router
