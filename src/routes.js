@@ -3,7 +3,7 @@ import RootLayout from './components/RootLayout'
 import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Users from './pages/Users'
-import UserEdit, { userLoader } from './pages/UserEdit'
+import EditUser, { userLoader } from './pages/EditUser'
 import SignIn from './pages/SignIn'
 
 const router = createBrowserRouter([
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         path: '/users/:userId',
         element: (
           <ProtectedRoute>
-            <UserEdit />
+            <EditUser />
           </ProtectedRoute>
         ),
         loader: userLoader,

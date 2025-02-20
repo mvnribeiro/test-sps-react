@@ -30,15 +30,37 @@ class UserService {
   }
 
   async create(data) {
-    throw new Error("Not implemented")
+    try {
+      const user = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/users`,
+        data)
+      return user.data
+    } catch (error) {
+      console.error('Error creating user:', error)
+      throw error
+    }
   }
 
   async delete(id) {
-    throw new Error("Not implemented")
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}`)
+    } catch (error) {
+      console.error(`Error deleting user ${id}:`, error)
+      throw error
+    }
   }
 
   async update(id, data) {
-    throw new Error("Not implemented")
+    try {
+      const user = await axios.put(
+        `${process.env.REACT_APP_SERVER_URL}/users/${id}`,
+        data)
+      return user.data
+    } catch (error) {
+      console.error(`Error updating user ${id}:`, error)
+      throw error
+    }
   }
 }
 
