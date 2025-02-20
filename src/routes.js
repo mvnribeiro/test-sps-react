@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home'
 import Users from './pages/Users'
 import EditUser, { userLoader } from './pages/EditUser'
+import CreateUser from './pages/CreateUser'
 import SignIn from './pages/SignIn'
 
 const router = createBrowserRouter([
@@ -39,6 +40,14 @@ const router = createBrowserRouter([
         ),
         loader: userLoader,
       },
+      {
+        path: '/user/create',
+        element: (
+          <ProtectedRoute>
+            <CreateUser />
+          </ProtectedRoute>
+        ),
+      }
     ],
   },
 ])
