@@ -55,7 +55,7 @@ function EditUser() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh' }}>
+    <div className='container'>
       <h1>Edição de Usuário</h1>
       <UserForm 
         initialData={user} 
@@ -63,9 +63,8 @@ function EditUser() {
         extraActions={
           <button 
             type="button" 
-            className="form-button delete-button" 
+            className="button delete-button" 
             onClick={handleDelete}
-            style={{ marginLeft: '10px', backgroundColor: '#dc3545' }}
           >
             Excluir
           </button>

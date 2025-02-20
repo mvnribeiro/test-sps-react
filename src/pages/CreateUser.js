@@ -25,14 +25,7 @@ function CreateUser() {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: '100vh',
-      }}
-    >
+    <div className='container'>
       <h1>Criação de Usuário</h1>
       <UserForm initialData={initialData} onSubmit={handleSubmit} />
     </div>

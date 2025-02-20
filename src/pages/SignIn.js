@@ -20,50 +20,49 @@ const SignIn = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h2>
-          Sign in
-        </h2>
-        
-        {error && (
-          <div>
-            {error}
-          </div>
-        )}
+    <div className='container'>
+      <h2 className='header'>
+        Login
+      </h2>
+      
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
 
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button
-            type="submit"
-          >
-            Sign in
-          </button>
-        </form>
-      </div>
+      <form onSubmit={handleSubmit} className='form'>
+        <div className='form-group'>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className='form-input'
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='form-input'
+          />
+        </div>
+        <button
+          type="submit"
+          className="button"
+        >
+          Sign in
+        </button>
+      </form>
     </div>
   )
 }
