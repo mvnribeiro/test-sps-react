@@ -1,10 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LoginService from '../services/LoginService'
+import UserService from '../services/UserService'
 
 export const AuthContext = createContext()
 
 const loginService = new LoginService()
+const userService = new UserService()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
@@ -18,6 +20,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const user = JSON.parse(loggedUserJson)
         setUser(user)
+        userService.setToken(user.token)
       } catch (error) {
         console.error('Error parsing user data:', error)
         localStorage.removeItem('loggedUser')
@@ -34,6 +37,7 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         localStorage.setItem('loggedUser', JSON.stringify(user))
         setUser(user)
+        userService.setToken(user.token)
         navigate('/')
         return true
       }
