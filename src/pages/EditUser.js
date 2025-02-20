@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLoaderData, useParams } from 'react-router-dom'
-import UserService from '../services/UserService'
+import userService from '../services/UserService'
 import UserForm from '../components/UserForm'
 
 const userService = new UserService()

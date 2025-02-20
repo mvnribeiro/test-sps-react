@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import UserService from '../services/UserService'
+import userService from '../services/UserService'
 import { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import UserList from '../components/UserList'
-
-const userService = new UserService()
 
 function Users() {
   const [users, setUsers] = useState([])
